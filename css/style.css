@@ -1,0 +1,448 @@
+/* Global Styles & Variables */
+:root {
+    --primary-color: #A0D2DB; /* Soft Teal/Blue */
+    --secondary-color: #E6C984; /* Soft Gold */
+    --text-color: #4A4A4A; /* Dark Grey */
+    --bg-color: #FEFEF8; /* Off-white/Ivory */
+    --light-bg: #FFFFFF;
+    --heading-font: 'Poppins', sans-serif;
+    --body-font: 'Montserrat', sans-serif;
+    --accent-font: 'Satisfy', cursive;
+    --border-radius: 15px; /* Sedikit lebih besar untuk kesan modern */
+    --shadow-soft: 0 8px 25px rgba(0, 0, 0, 0.07); /* Shadow yang lebih lembut */
+    --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --transition-main: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Easing yang lebih smooth */
+    --primary-rgb: 160, 210, 219; /* Untuk gradient overlay di hero */
+    --secondary-rgb: 230, 201, 132; /* Untuk gradient overlay di hero */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth; /* Scroll yang lebih halus */
+}
+
+body {
+    font-family: var(--body-font);
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.75; /* Sedikit lebih lega */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* Mencegah scroll horizontal */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 15px; /* Padding agar konten tidak menempel di tepi layar kecil */
+    opacity: 0;
+    animation: fadeInContainer 1s ease-out 0.5s forwards; /* Animasi muncul container utama */
+}
+
+@keyframes fadeInContainer {
+    to { opacity: 1; }
+}
+
+/* Hilangkan animasi opacity di body.loaded .container jika sudah diatur di .container dengan @keyframes */
+body.loaded .container {
+    /* opacity: 1; -- Sudah dihandle @keyframes */
+}
+
+/* Loader */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color); /* Warna primer untuk kesan pertama yang kuat */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s ease-in-out, visibility 0s linear 0.8s; /* Transisi lebih lama */
+}
+
+body.loaded .loader-wrapper {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    border: 5px solid rgba(255, 255, 255, 0.3); /* Border lebih tipis, warna transparan */
+    border-top: 5px solid var(--light-bg); /* Warna terang untuk kontras */
+    border-radius: 50%;
+    width: 60px; /* Sedikit lebih besar */
+    height: 60px;
+    animation: spin 1s linear infinite; /* Spin lebih cepat */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Typography & General Elements */
+h1, h2, h3 {
+    font-family: var(--heading-font);
+    text-align: center;
+    line-height: 1.3;
+    font-weight: 700; /* Konsisten bold */
+}
+
+h1 { /* Untuk judul utama di hero, child_greeting */
+    font-size: clamp(1.6rem, 4vw, 2rem); /* Responsive font size */
+    color: var(--light-bg);
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+h2 { /* Untuk judul section */
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    color: var(--text-color);
+    margin-bottom: 2rem; /* Jarak lebih besar */
+    position: relative;
+    padding-bottom: 0.75rem;
+}
+/* Garis bawah dekoratif untuk H2 */
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: var(--secondary-color);
+    border-radius: 2px;
+}
+
+#child-name-hero {
+    font-family: var(--accent-font);
+    font-size: clamp(2.8rem, 8vw, 4rem); /* Lebih besar dan responsif */
+    color: var(--secondary-color);
+    margin-bottom: 0.75rem;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+}
+h3 { /* Untuk sub-judul di dalam card */
+    font-size: clamp(1.2rem, 3vw, 1.4rem);
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+p {
+    margin-bottom: 1.2rem; /* Jarak antar paragraf lebih besar */
+    text-align: center;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+
+.btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--light-bg); /* Teks terang agar kontras */
+    padding: 14px 30px; /* Padding lebih besar */
+    border: none;
+    border-radius: 50px; /* Border radius penuh untuk tampilan modern */
+    text-decoration: none;
+    font-family: var(--heading-font);
+    font-weight: 600;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-size 0.4s ease;
+    box-shadow: 0 5px 15px rgba(var(--primary-rgb), 0.3);
+    background-size: 100% 100%;
+}
+.btn:hover, .btn:focus {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(var(--secondary-rgb), 0.4);
+    background-size: 150% 150%; /* Efek zoom pada gradient */
+    outline: none;
+}
+.btn i { margin-right: 10px; }
+
+.small-note {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 1rem;
+}
+
+/* Hero Section */
+.hero-section {
+    background-image: url('../images/hero-bg-pattern.png');
+    background-color: var(--primary-color);
+    background-blend-mode: overlay; /* Blend mode berbeda untuk efek visual baru */
+    background-size: cover; /* Pastikan cover */
+    background-position: center center;
+    /* Nonaktifkan parallax di mobile karena bisa berat dan janky */
+    background-attachment: scroll; /* Default untuk mobile */
+    color: var(--light-bg);
+    padding: clamp(80px, 20vh, 150px) 20px clamp(60px, 15vh, 120px); /* Padding responsif */
+    text-align: center;
+    border-bottom-left-radius: 60px; /* Kurva lebih besar */
+    border-bottom-right-radius: 60px;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+    overflow: hidden; /* Untuk efek pseudo-elements */
+}
+
+/* Efek Parallax hanya untuk Desktop */
+@media (min-width: 1024px) {
+    .hero-section {
+        background-attachment: fixed; /* Aktifkan parallax di desktop */
+    }
+}
+
+
+.hero-section::before { /* Overlay gradien */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(var(--primary-rgb), 0.5) 0%, rgba(var(--secondary-rgb), 0.3) 100%);
+    opacity: 0.85;
+    z-index: 0; /* Di bawah konten */
+}
+
+.hero-content {
+    position: relative; /* Di atas overlay */
+    z-index: 1;
+}
+
+.hero-content .event-type {
+    font-family: var(--heading-font);
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 0.75rem;
+    animation: fadeInDown 0.8s var(--transition-main) 0.2s backwards;
+}
+.hero-content .parents-names {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: rgba(255,255,255,0.9);
+    animation: fadeInUp 0.8s var(--transition-main) 0.6s backwards;
+}
+#child-name-hero { /* Animasi khusus untuk nama anak */
+    animation: zoomIn 1s var(--transition-main) 0.4s backwards;
+}
+
+
+/* Main Content Sections */
+main section {
+    padding: clamp(40px, 8vw, 60px) clamp(15px, 4vw, 30px); /* Padding responsif */
+    margin: clamp(30px, 5vh, 50px) 15px; /* Margin responsif */
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-soft);
+    text-align: center;
+    /* Animasi fade-in akan ditangani oleh JS */
+}
+
+/* Invitation Text Section */
+.invitation-text_section .bismillah-graphic {
+    display: block;
+    margin: 0 auto 2rem; /* Jarak lebih besar */
+    height: clamp(40px, 8vw, 60px); /* Ukuran responsif */
+    opacity: 0.8;
+    filter: drop-shadow(0 2px 3px rgba(var(--primary-rgb),0.4)); /* Shadow halus */
+}
+.invitation-text_section .salam {
+    font-family: var(--heading-font);
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 1.8rem;
+}
+.child-focus {
+    margin: 2.5rem auto;
+    position: relative;
+    background-color: var(--bg-color); /* Background senada dengan body */
+    border-radius: var(--border-radius);
+    padding: 25px;
+    padding-top: clamp(80px, 18vw, 100px); /* Padding atas responsif untuk foto */
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.04), var(--shadow-soft); /* Kombinasi shadow */
+}
+.child-photo {
+    width: clamp(140px, 30vw, 180px); /* Ukuran foto responsif */
+    height: clamp(140px, 30vw, 180px);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 8px solid var(--light-bg); /* Border lebih tebal */
+    box-shadow: 0 0 0 8px var(--secondary-color), 0 10px 25px rgba(0,0,0,0.15); /* Double border & shadow lebih kuat */
+    position: absolute;
+    top: calc(clamp(140px, 30vw, 180px) / -2 + 10px); /* Posisi tumpang tindih yang lebih baik */
+    left: 50%;
+    transform: translateX(-50%);
+    transition: transform 0.4s ease-in-out;
+}
+.child-photo:hover {
+    transform: translateX(-50%) scale(1.08) rotate(3deg); /* Efek hover interaktif */
+}
+#child-name-main {
+    font-family: var(--accent-font);
+    font-size: clamp(2rem, 6vw, 2.5rem);
+    color: var(--secondary-color);
+    margin-top: 0.5rem; /* Disesuaikan karena padding-top child-focus */
+    margin-bottom: 0.5rem;
+}
+#guest-name-display {
+    font-weight: 700; /* Lebih bold */
+    font-size: clamp(1rem, 2.8vw, 1.2rem);
+    color: var(--primary-color);
+    margin-top: 2rem;
+    background-color: rgba(var(--primary-rgb), 0.1); /* Highlight lembut */
+    padding: 8px 15px;
+    border-radius: 30px;
+    display: inline-block; /* Agar padding bekerja */
+}
+
+/* Event Details Section */
+.event-details_section .details-card {
+    background-color: var(--light-bg);
+    padding: clamp(20px, 5vw, 30px);
+    border-radius: var(--border-radius);
+    margin-bottom: 25px;
+    border: none; /* Hilangkan border dashed, gunakan shadow untuk kedalaman */
+    box-shadow: 0 4px 8px rgba(var(--primary-rgb),0.1), 0 6px 12px rgba(var(--primary-rgb),0.08); /* Neumorphism halus */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.event-details_section .details-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 15px rgba(var(--primary-rgb),0.15), 0 10px 20px rgba(var(--primary-rgb),0.1);
+}
+.event-icon {
+    font-size: clamp(2.2rem, 6vw, 3rem);
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    display: block;
+    text-shadow: 0 2px 4px rgba(var(--secondary-rgb), 0.3); /* Shadow untuk ikon */
+    animation: iconFloat 3s ease-in-out infinite alternate; /* Animasi mengambang */
+}
+.btn-maps {
+    margin-top: 1.5rem;
+    background: var(--primary-color);
+}
+
+/* Doa & Ucapan Section */
+.btn-whatsapp-doa {
+    background: linear-gradient(135deg, #25D366, #128C7E); /* Gradien WhatsApp */
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+/* Gallery Section */
+.gallery_section .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(120px, 25vw, 180px), 1fr)); /* Ukuran kolom responsif */
+    gap: clamp(10px, 2vw, 15px); /* Gap responsif */
+    margin-top: 1.5rem;
+}
+.gallery_section .gallery-grid img {
+    width: 100%;
+    height: clamp(130px, 28vw, 200px); /* Tinggi responsif */
+    object-fit: cover;
+    border-radius: 10px; /* Border radius lebih kecil untuk grid */
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.35s ease-in-out, box-shadow 0.35s ease-in-out, filter 0.35s ease;
+    cursor: pointer; /* Indikasi bisa diklik (jika ada lightbox) */
+}
+.gallery_section .gallery-grid img:hover {
+    transform: scale(1.08) rotate(-2deg); /* Efek hover lebih dinamis */
+    box-shadow: var(--shadow-medium);
+    filter: brightness(1.1);
+}
+
+/* Info Update Section */
+.info-update_section .info-content {
+    padding: 25px;
+    background-color: rgba(var(--secondary-rgb), 0.1); /* Latar dari warna sekunder */
+    border-radius: var(--border-radius);
+    border-left: 6px solid var(--secondary-color); /* Border lebih tebal */
+    text-align: left; /* Teks rata kiri untuk info */
+}
+.info-update_section .info-content p { text-align: left; }
+.info-update_section .info-content .event-icon {
+    float: left; /* Ikon di samping teks */
+    margin-right: 15px;
+    font-size: 2rem;
+    color: var(--secondary-color);
+    animation: none; /* Nonaktifkan float jika sudah ada float CSS */
+}
+
+/* Share Undangan Section */
+.share-undangan_section .btn-share {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); /* Konsisten dengan tombol utama */
+}
+
+/* Footer */
+footer {
+    padding: clamp(30px, 8vh, 50px) 20px;
+    background: var(--primary-color);
+    color: var(--light-bg);
+    border-top-left-radius: 60px; /* Senada dengan hero */
+    border-top-right-radius: 60px;
+    margin-top: clamp(30px, 5vh, 50px);
+    box-shadow: 0 -8px 25px rgba(0,0,0,0.1); /* Shadow atas */
+    text-align: center;
+}
+footer p { color: rgba(255,255,255,0.92); margin-bottom: 0.6rem; font-size: clamp(0.85rem, 2vw, 0.95rem); }
+footer .footer-names { font-family: var(--heading-font); font-weight: 600; font-size: clamp(0.9rem, 2.5vw, 1.05rem); }
+footer .credits { font-size: 0.8rem; opacity: 0.8; margin-top: 1rem;}
+footer .credits i { color: var(--secondary-color); animation: heartBeat 1.5s infinite ease-in-out; }
+
+/* Animasi untuk elemen */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px); /* Mulai sedikit dari bawah */
+    transition: opacity 0.8s var(--transition-main), transform 0.8s var(--transition-main);
+    will-change: opacity, transform; /* Optimasi performa */
+}
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Keyframe Animations */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes zoomIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+@keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    /* Penyesuaian font size sudah banyak menggunakan clamp(), jadi mungkin tidak banyak override di sini */
+    h2::after { width: 50px; height: 3px; } /* Garis bawah H2 lebih kecil */
+    .child-photo { border-width: 6px; box-shadow: 0 0 0 6px var(--secondary-color), 0 8px 20px rgba(0,0,0,0.12); }
+}
+
+@media (max-width: 480px) {
+    .container { padding: 0 10px; } /* Padding lebih kecil di mobile */
+    main section { margin: clamp(20px, 4vh, 30px) 10px; }
+    .hero-section { border-radius: 0 0 40px 40px; }
+    footer { border-radius: 40px 40px 0 0; }
+    .btn { padding: 12px 24px; } /* Tombol sedikit lebih kecil */
+    .info-update_section .info-content .event-icon { float: none; display: block; margin: 0 auto 10px; text-align: center; }
+    .info-update_section .info-content p { text-align: center; }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Aqiqah & Khitanan Ananda [Nama Anak]</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@600;700&family=Satisfy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container">
+        <header class="hero-section">
+            <div class="hero-content">
+                <p class="event-type" data-lang-key="event_type">AQIQAH / KHITANAN</p>
+                <h1 data-lang-key="child_greeting">Syukuran untuk Ananda</h1>
+                <h2 id="child-name-hero">[Nama Lengkap Anak]</h2>
+                <p class="parents-names" data-lang-key="parents_text">Putra/Putri dari Bapak [Nama Ayah] & Ibu [Nama Ibu]</p>
+            </div>
+        </header>
+
+        <main>
+            <section class="invitation-text_section fade-in">
+                <img src="images/bismillah.svg" alt="Bismillah" class="bismillah-graphic" onError="this.style.display='none'"> <p class="salam" data-lang-key="greeting_salam">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
+                <p data-lang-key="invitation_opening">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dalam acara tasyakuran Aqiqah/Khitanan putra/putri kami:</p>
+                <div class="child-focus">
+                    <img src="images/child-photo.jpg" alt="Foto Ananda [Nama Anak]" class="child-photo" onError="this.style.display='none'; this.parentElement.style.paddingTop='0px';">
+                    <h3 id="child-name-main">[Nama Lengkap Anak]</h3>
+                    <p id="child-dob" data-lang-key="child_dob_text">Lahir pada: [Tanggal Lahir Anak]</p>
+                </div>
+                <p data-lang-key="guest_greeting_intro">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
+                <p id="guest-name-display" data-lang-key="guest_name_default">Yth. Bapak/Ibu/Saudara/i</p>
+            </section>
+
+            <section class="event-details_section fade-in">
+                <h2 data-lang-key="event_details_title">Detail Acara</h2>
+                <div class="details-card">
+                    <i class="fas fa-calendar-alt event-icon"></i>
+                    <h3 data-lang-key="date_time_title">Waktu & Tanggal</h3>
+                    <p id="event-date">[Hari, Tanggal Bulan Tahun]</p>
+                    <p id="event-time">[Pukul: Waktu Mulai] WIB - Selesai</p>
+                </div>
+                <div class="details-card">
+                    <i class="fas fa-map-marker-alt event-icon"></i>
+                    <h3 data-lang-key="location_title">Lokasi Acara</h3>
+                    <p id="event-venue">[Nama Tempat/Kediaman]</p>
+                    <p id="event-address">[Alamat Lengkap Lokasi]</p>
+                    <a href="#" id="maps-link" target="_blank" class="btn btn-maps" data-lang-key="maps_button"><i class="fas fa-directions"></i> Lihat Peta</a>
+                </div>
+            </section>
+
+            <section class="doa-ucapan_section fade-in">
+                <h2 data-lang-key="doa_title">Doa & Ucapan</h2>
+                <p data-lang-key="doa_text">Kehadiran dan doa restu Bapak/Ibu/Saudara/i adalah kado terindah bagi kami dan ananda.</p>
+                <a href="https://wa.me/6281234567890?text=Saya%20ingin%20mengucapkan%20selamat%20untuk%20acara%20Ananda%20[Nama Anak]..." target="_blank" class="btn btn-whatsapp-doa">
+                    <i class="fab fa-whatsapp"></i> <span data-lang-key="send_doa_whatsapp">Kirim Doa via WhatsApp</span>
+                </a>
+            </section>
+            
+            <section class="gallery_section fade-in">
+                <h2 data-lang-key="gallery_title">Galeri Ananda</h2>
+                <div class="gallery-grid">
+                    <img src="images/child-photo.jpg" alt="Galeri Foto 1" onError="this.parentElement.style.display='none'">
+                    <img src="images/child-photo.jpg" alt="Galeri Foto 2" onError="this.parentElement.style.display='none'">
+                    <img src="images/child-photo.jpg" alt="Galeri Foto 3" onError="this.parentElement.style.display='none'">
+                </div>
+                 <p class="small-note" data-lang-key="gallery_note">Momen kebahagiaan bersama ananda.</p>
+            </section>
+
+            <section class="info-update_section fade-in">
+                <h2 data-lang-key="info_update_title">Info Terbaru & Protokol</h2>
+                <div class="info-content">
+                    <i class="fas fa-bell event-icon"></i>
+                    <p data-lang-key="info_update_text">Untuk kenyamanan bersama, acara akan diselenggarakan dengan tetap memperhatikan protokol kesehatan. Terima kasih atas pengertiannya.</p>
+                    </div>
+            </section>
+
+            <section class="share-undangan_section fade-in">
+                <h2 data-lang-key="share_title">Bagikan Undangan Ini</h2>
+                <button id="whatsapp-share-btn" class="btn btn-share"><i class="fab fa-whatsapp"></i> <span data-lang-key="share_whatsapp_button">Bagikan via WhatsApp</span></button>
+            </section>
+        </main>
+
+        <footer class="fade-in">
+            <p data-lang-key="closing_thank_you">Jazakumullahu Khairan Katsiran.</p>
+            <p data-lang-key="closing_greeting">Wassalamu'alaikum Warahmatullahi Wabarakatuh.</p>
+            <p class="footer-names">Keluarga Besar Bapak [Nama Ayah] & Ibu [Nama Ibu]</p>
+            <p class="credits">&copy; <span id="current-year"></span> Dibuat dengan <i class="fas fa-heart"></i> untuk Ananda.</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
